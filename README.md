@@ -5,12 +5,12 @@
 ## 実行方法
 
 ```sh
-pnpm dev <URL>
+npm run dev <URL>
 ```
 
 ### Docker
 
 ```sh
 docker build -t oh-my-video .
-docker run oh-my-video <URL>
+docker run oh-my-video start <URL>
 ```
