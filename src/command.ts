@@ -1,3 +1,4 @@
+import * as cheerio from "cheerio";
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 
@@ -13,8 +14,19 @@ export async function command(url: string) {
   await browser.close();
 
   const results = html.match(
-    /https:\/\/[a-zA-Z0-9_\.\/-]+\.mp4(\?[a-zA-Z0-9_=&,\.;\-]*)?/g,
+    /https:\/\/[a-zA-Z0-9_\.\/-]+\.mp4\/?([a-zA-Z0-9_=&,?\.\-]*)?/g,
   );
 
-  return results;
+  // meta
+  const $ = cheerio.load(html);
+  const meta = {
+    title: $('meta[property="og:title"]').attr('content'),
+    thumbnail: $('meta[property="og:image"]').attr('content'),
+    url: $('meta[property="og:url"]').attr('content'),
+  };
+
+  return {
+    meta,
+    videos: results,
+  };
 };

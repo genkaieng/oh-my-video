@@ -24,11 +24,9 @@ export function start(port = 8000) {
           }));
           break;
         }
-        const results = await command(pageUrl);
+        const result = await command(pageUrl);
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({
-          results,
-        }));
+        res.end(JSON.stringify(result));
         break;
       }
       default: {
