@@ -3,7 +3,7 @@ import { command } from './command';
 
 const hostname = '127.0.0.1';
 
-export function start(port = 8000) {
+export function start(port = 8080) {
   const server = http.createServer(async (req, res) => {
     const url = req.url ? new URL(req.url, 'http://' + hostname) : undefined;
 
