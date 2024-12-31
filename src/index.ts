@@ -7,6 +7,10 @@ switch(arg) {
   case 'server':
     start();
     break;
+  case 'version':
+    console.log('Version:', process.env.npm_package_version);
+    console.log('Author:', process.env.npm_package_author);
+    break;
   default:{
     if (!/https?:\/\//.test(arg)) {
       throw new Error("URLを指定してください");
