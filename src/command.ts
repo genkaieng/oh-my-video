@@ -21,8 +21,10 @@ export async function command(url: string) {
   const $ = cheerio.load(html);
   const meta = {
     title: $('meta[property="og:title"]').attr('content'),
+    description: $('meta[property="og:description"]').attr('content'),
     thumbnail: $('meta[property="og:image"]').attr('content'),
     url: $('meta[property="og:url"]').attr('content'),
+    keywords: $('meta[name="keywords"]').attr('content')?.replace(/, /g, ',').split(','),
   };
 
   return {
